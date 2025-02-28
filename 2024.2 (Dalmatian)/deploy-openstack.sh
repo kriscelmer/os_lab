@@ -186,3 +186,4 @@ source /etc/kolla/admin-openrc.sh
 (Optionally shutdown the system now and take the VM snapshot in VMware Workstation Pro, restart the VM.)
 
 Run lab-config.sh script to configure OpenStack Lab.
+EOF
