@@ -43,7 +43,7 @@ kolla-genpwd
 echo "<---"
 
 echo "---> Configuring Kolla-Ansible (globals.yml)"
-cat EOF | tee -a /etc/kolla/globals.yml
+cat << EOF | tee -a /etc/kolla/globals.yml
 # ---------------------------------------------------
 #
 # OpenStack Dalmatian All-in-One Lab deployment configuration
