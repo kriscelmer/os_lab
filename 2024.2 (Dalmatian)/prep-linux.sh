@@ -1,5 +1,10 @@
 #! /bin/bash
 
+# To run this script in freshly installed Ubuntu 24.04:
+# $ wget "https://raw.githubusercontent.com/kriscelmer/os_lab/refs/heads/main/2024.2%20(Dalmatian)/prep-linux.sh"
+# $ bash prep-linux.sh
+# Follow on screen instructions
+
 echo "---> Prepare Ubuntu Linux for OpenStack 2024.2 (Dalmatian) All-in-One Lab"
 echo ""
 set -e
@@ -83,5 +88,12 @@ sudo shutdown now
 (Optionally take the VM snapshot in VMware Workstation Pro.)
 
 Restart the VM and run kolla-deploy.sh script to continue OpenStack Lab deployment.
+You can SSH to Ubuntu VM from Windows host with:
+
+ssh openstack@10.0.0.11
+
+You may need to remove old SSH keys with:
+
+ssh-keygen -R 10.0.0.11
 
 EOF
