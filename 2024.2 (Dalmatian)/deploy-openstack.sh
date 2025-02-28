@@ -3,7 +3,8 @@
 # To run this script in freshly installed Ubuntu 24.04:
 # $ wget "https://raw.githubusercontent.com/kriscelmer/os_lab/refs/heads/main/2024.2%20(Dalmatian)/deploy-openstack.sh"
 # $ bash deploy-openstack.sh
-# Follow on screen instructions
+# Script takes 20-45 minutes to complete
+# Follow on screen instructions when script finishes
 
 echo "---> Deploy OpenStack 2024.2 (Dalmatian) All-in-One Lab using Kolla-Ansible in Docker containers"
 echo ""
