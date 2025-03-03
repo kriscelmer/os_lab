@@ -87,7 +87,7 @@ enable_aodh: "yes"
 enable_gnocchi: "yes"
 enable_skyline: "yes"
 enable_central_logging: "yes"
-enable_grafana: "yes"
+#enable_grafana: "yes"
 
 # Configure Cinder LVM Backend
 enable_cinder_backend_lvm: "yes"
