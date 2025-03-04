@@ -86,7 +86,7 @@ enable_ceilometer: "yes"
 enable_aodh: "yes"
 enable_gnocchi: "yes"
 enable_skyline: "yes"
-enable_central_logging: "yes"
+#enable_central_logging: "yes"
 #enable_grafana: "yes"
 
 # Configure Cinder LVM Backend
