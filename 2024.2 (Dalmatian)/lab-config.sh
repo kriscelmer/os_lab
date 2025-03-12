@@ -141,7 +141,7 @@ openstack security group rule create --ethertype IPv4 --protocol tcp --dst-port 
 echo "<---"
 
 echo "---> Creating an instance lab1-inst"
-openstack server create --flavor m1.tiny --image lab1-cirros --network lab1-net --security group default --security group ssh-icmp --wait lab1-inst
+openstack server create --flavor m1.tiny --image lab1-cirros --network lab1-net --security-group default --security-group ssh-icmp --wait lab1-inst
 openstack server stop lab1-inst
 echo "<---"
 
