@@ -142,7 +142,7 @@ echo "<---"
 
 echo "---> Creating an instance lab1-inst"
 openstack server create --flavor m1.tiny --image lab1-cirros --network lab1-net --security-group default --security-group ssh-icmp --wait lab1-inst
-openstack server stop lab1-inst
+openstack server stop --wait lab1-inst
 echo "<---"
 
 echo "---> Creating a new, empty volume lab1-vol and attach to lab1-inst"
