@@ -86,12 +86,22 @@ enable_ceilometer: "yes"
 enable_aodh: "yes"
 enable_gnocchi: "yes"
 enable_skyline: "yes"
-#enable_central_logging: "yes"
-#enable_grafana: "yes"
 
 # Configure Cinder LVM Backend
 enable_cinder_backend_lvm: "yes"
-cinder_volume_group: "cinder-volumes"
+# Enable multi-backend support
+cinder_multi_backend: "yes"
+
+# Define your Cinder backends
+cinder_backends:
+  lvm1:
+    volume_driver: "cinder.volume.drivers.lvm.LVMVolumeDriver"
+    volume_group: "cinder-volumes"
+    volume_backend_name: "LVM_Backend_1"
+  lvm2:
+    volume_driver: "cinder.volume.drivers.lvm.LVMVolumeDriver"
+    volume_group: "cinder-volumes2"
+    volume_backend_name: "LVM_Backend_2"
 
 # Configure Designate
 enable_designate: "yes"

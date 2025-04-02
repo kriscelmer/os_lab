@@ -61,11 +61,30 @@ sudo apt install -y bridge-utils cpu-checker libvirt-clients libvirt-daemon qemu
 sudo apt install -y python3-dev python3-venv git libffi-dev gcc libssl-dev libdbus-glib-1-dev vim net-tools htop dnsutils
 echo "<---"
 
-echo "---> Preparing second disk for Cinder LVM volumes"
-# Create LVM physical volume
-sudo pvcreate /dev/sdb
-# Create a volume group named cinder-volumes
-sudo vgcreate cinder-volumes /dev/sdb
+echo "---> Preparing second disk for Cinder LVM volume groups"
+# Create a new GPT partition table
+sudo parted /dev/sdb mklabel gpt
+# Create the first partition (approx 100GiB)
+# -a opt ensures optimal alignment
+sudo parted -a opt /dev/sdb mkpart primary 1MiB 100GiB
+# Create the second partition (using the remaining space, approx 20GiB)
+sudo parted -a opt /dev/sdb mkpart primary 100GiB 100%
+# Set the LVM flag on both partitions
+sudo parted /dev/sdb set 1 lvm on
+sudo parted /dev/sdb set 2 lvm on
+# Verify the partitions (optional but recommended)
+sudo parted /dev/sdb print
+# Initialize the first partition as a PV
+sudo pvcreate /dev/sdb1
+# Initialize the second partition as a PV
+sudo pvcreate /dev/sdb2
+# Verify PV creation
+sudo pvs
+# Create the first VG using the first partition
+sudo vgcreate cinder-volumes /dev/sdb1
+# Create the second VG using the second partition
+sudo vgcreate cinder-volumes2 /dev/sdb2
+# Verify VG creation
 sudo vgs
 echo "<---"
 

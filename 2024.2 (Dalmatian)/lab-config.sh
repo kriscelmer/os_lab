@@ -36,18 +36,18 @@ wget https://download.cirros-cloud.net/0.6.3/cirros-0.6.3-x86_64-disk.img
 openstack image create --public --file cirros-0.6.3-x86_64-disk.img --disk-format qcow2 --container-format bare public-cirros
 echo "<---"
 
-echo "---> Creating project/tenant demo-tenant, user demo with role member in demo-tenant"
-openstack project create --enable demo-tenant
-openstack user create --project demo-tenant --password openstack --ignore-password-expiry demo
-openstack role add --user demo --project demo-tenant member
+echo "---> Creating project demo-project, user demo with role member in demo-project"
+openstack project create --enable demo-project
+openstack user create --project demo-project --password openstack --ignore-password-expiry demo
+openstack role add --user demo --project demo-project member
 echo "<---"
 
 echo "---> Creating openrc file for user demo"
 cat << EOF > ~/.demo-openrc.sh
 export OS_PROJECT_DOMAIN_NAME='Default'
 export OS_USER_DOMAIN_NAME='Default'
-export OS_PROJECT_NAME='demo-tenant'
-export OS_TENANT_NAME='demo-tenant'
+export OS_PROJECT_NAME='demo-project'
+export OS_TENANT_NAME='demo-project'
 export OS_USERNAME='demo'
 export OS_PASSWORD='openstack'
 export OS_AUTH_URL='http://10.0.0.11:5000'
