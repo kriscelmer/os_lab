@@ -90,18 +90,18 @@ enable_skyline: "yes"
 # Configure Cinder LVM Backend
 enable_cinder_backend_lvm: "yes"
 # Enable multi-backend support
-cinder_multi_backend: "yes"
+# cinder_multi_backend: "yes"
 
 # Define your Cinder backends
-cinder_backends:
-  lvm-1:
-    volume_driver: "cinder.volume.drivers.lvm.LVMVolumeDriver"
-    volume_group: "cinder-volumes"
-    volume_backend_name: "LVM_Backend_1"
-  lvm-2:
-    volume_driver: "cinder.volume.drivers.lvm.LVMVolumeDriver"
-    volume_group: "cinder-volumes2"
-    volume_backend_name: "LVM_Backend_2"
+# cinder_backends:
+#   lvm-1:
+#     volume_driver: "cinder.volume.drivers.lvm.LVMVolumeDriver"
+#     volume_group: "cinder-volumes"
+#     volume_backend_name: "LVM_Backend_1"
+#   lvm-2:
+#     volume_driver: "cinder.volume.drivers.lvm.LVMVolumeDriver"
+#     volume_group: "cinder-volumes2"
+#     volume_backend_name: "LVM_Backend_2"
 
 # Configure Designate
 enable_designate: "yes"
