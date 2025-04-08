@@ -59,16 +59,16 @@ export OS_AUTH_PLUGIN='password'
 EOF
 echo "<---"
 
-echo "---> Sharing example.test. zone with demo-tenant project"
-PROJECT_TENANT_ID=$(openstack project show -f value -c id demo-tenant)
-openstack zone share create example.test. $PROJECT_TENANT_ID
+echo "---> Sharing example.test. zone with demo-project project"
+PROJECT_PROJECT_ID=$(openstack project show -f value -c id demo-project)
+openstack zone share create example.test. $PROJECT_PROJECT_ID
 echo "<---"
 
-echo "---> Switching CLI credentials to user demo in demo-tenant project"
+echo "---> Switching CLI credentials to user demo in demo-project project"
 source ~/.demo-openrc.sh
 echo "<---"
 
-echo "---> Creating demo-net network and demo-router in project demo-tenant"
+echo "---> Creating demo-net network and demo-router in project demo-project"
 openstack network create demo-net
 openstack subnet create --network demo-net --subnet-range 10.10.10.0/24 demo-subnet
 openstack router create demo-router

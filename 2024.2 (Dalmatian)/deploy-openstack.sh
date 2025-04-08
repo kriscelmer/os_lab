@@ -94,11 +94,11 @@ cinder_multi_backend: "yes"
 
 # Define your Cinder backends
 cinder_backends:
-  lvm1:
+  lvm-1:
     volume_driver: "cinder.volume.drivers.lvm.LVMVolumeDriver"
     volume_group: "cinder-volumes"
     volume_backend_name: "LVM_Backend_1"
-  lvm2:
+  lvm-2:
     volume_driver: "cinder.volume.drivers.lvm.LVMVolumeDriver"
     volume_group: "cinder-volumes2"
     volume_backend_name: "LVM_Backend_2"
