@@ -99,14 +99,14 @@ echo "<---"
 
 cat << EOF
 
-Ubntu Linux is now configured and ready for Kolla Ansible OpenStack deployment.
+Ubuntu Linux is now configured and ready for Kolla Ansible OpenStack deployment.
 Shutdown the system with:
 
 sudo shutdown now
 
 (Optionally take the VM snapshot in VMware Workstation Pro.)
 
-Restart the VM and run kolla-deploy.sh script to continue OpenStack Lab deployment.
+Restart the VM and run deploy-openstack.sh script to continue OpenStack Lab deployment.
 You can SSH to Ubuntu VM from Windows host with:
 
 ssh openstack@10.0.0.11
