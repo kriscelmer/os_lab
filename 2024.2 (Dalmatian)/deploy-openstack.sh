@@ -124,7 +124,7 @@ pip install docker
 echo "<---"
 
 echo "---> Verifying correct version of requests is installed"
-pip uninstall requests
+pip uninstall -y requests
 pip install requests==2.31.0
 echo "--->"
 
