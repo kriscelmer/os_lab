@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# To run this script in freshly installed Ubuntu 24.04:
-# $ wget "https://raw.githubusercontent.com/kriscelmer/os_lab/refs/heads/main/2024.2%20(Dalmatian)/lab-config.sh"
+# Run this script after succesful OpenStack deployment with 'deploy-openstack.sh' script:
+# $ wget "https://raw.githubusercontent.com/kriscelmer/os_lab/refs/heads/main/2025.1%20(Epoxy)/lab-config.sh"
 # $ bash lab-config.sh
 # Follow on screen instructions when script finishes
 
