@@ -15,7 +15,7 @@ echo "---> Creating and activating virtual environment"
 cd ~
 python3 -m venv --system-site-packages ~/openstack-venv
 source ~/openstack-venv/bin/activate
-pip install -U pip
+pip install -U --quiet pip
 echo "<---"
 
 echo "---> Adding virtual environment activation to .bashrc"
@@ -23,7 +23,7 @@ echo "source ~/openstack-venv/bin/activate" >> ~/.bashrc
 echo "<---"
 
 echo "---> Installing Kolla-Ansible"
-pip install git+https://opendev.org/openstack/kolla-ansible@stable/2025.1
+pip install --quiet git+https://opendev.org/openstack/kolla-ansible@stable/2025.1
 echo "<---"
 
 echo "---> Installing Ansible Galaxy Dependencies"
