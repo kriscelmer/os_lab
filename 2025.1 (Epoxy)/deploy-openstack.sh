@@ -44,7 +44,7 @@ kolla-genpwd
 echo "<---"
 
 echo "---> Configuring Kolla-Ansible (globals.yml)"
-cat EOF | tee -a /etc/kolla/globals.yml
+cat << EOF | tee -a /etc/kolla/globals.yml
 # ---------------------------------------------------
 #
 # OpenStack Epoxy All-in-One Lab deployment configuration
