@@ -23,7 +23,7 @@ echo "source ~/openstack-venv/bin/activate" >> ~/.bashrc
 echo "<---"
 
 echo "---> Installing Kolla-Ansible"
-pip install --quiet git+https://opendev.org/openstack/kolla-ansible@stable/2025.1
+pip install git+https://opendev.org/openstack/kolla-ansible@stable/2025.1
 echo "<---"
 
 echo "---> Installing Ansible Galaxy Dependencies"
@@ -41,6 +41,10 @@ echo "<---"
 
 echo "---> Generating passwords for OpenStack services and users"
 kolla-genpwd
+echo "<---"
+
+echo "---> Set password for 'admin' user"
+sudo yq -i -y '.keystone_admin_password = "openstack"' /etc/kolla/passwords.yml
 echo "<---"
 
 echo "---> Configuring Kolla-Ansible (globals.yml)"
