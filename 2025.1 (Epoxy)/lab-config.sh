@@ -44,18 +44,24 @@ echo "<---"
 
 echo "---> Creating openrc file for user demo"
 cat << EOF > ~/.demo-openrc.sh
+# Clear any previous OS_* env vars
+for key in $( set | awk '{FS="="}  /^OS_/ {print $1}' ); do unset $key ; done
+# Set OS_* env vars for user 'demo' in project 'demo-project'
 export OS_PROJECT_DOMAIN_NAME='Default'
 export OS_USER_DOMAIN_NAME='Default'
 export OS_PROJECT_NAME='demo-project'
-export OS_TENANT_NAME='demo-project'
 export OS_USERNAME='demo'
-export OS_PASSWORD='openstack'
 export OS_AUTH_URL='http://10.0.0.11:5000'
-export OS_INTERFACE='internal'
-export OS_ENDPOINT_TYPE='internalURL'
+export OS_INTERFACE=public
+#export OS_ENDPOINT_TYPE='internalURL'
 export OS_IDENTITY_API_VERSION='3'
 export OS_REGION_NAME='RegionOne'
 export OS_AUTH_PLUGIN='password'
+# Read password from the terminal
+read -rsp "Please enter OpenStack password for user '$OS_USERNAME' (in project '$OS_PROJECT_NAME'): " OS_PASSWORD_INPUT
+echo
+export OS_PASSWORD=$OS_PASSWORD_INPUT
+unset OS_PASSWORD_INPUT
 EOF
 echo "<---"
 
