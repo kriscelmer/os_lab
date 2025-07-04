@@ -62,7 +62,12 @@ read -rsp "Please enter OpenStack password for user '$OS_USERNAME' (in project '
 echo
 export OS_PASSWORD=$OS_PASSWORD_INPUT
 unset OS_PASSWORD_INPUT
+PS1='[\u@\h \W( demo )]\$ '
 EOF
+echo "<---"
+
+echo "---> Adding admin user name to shell prompt in admin-openrc.sh"
+echo "PS1='[\u@\h \W( admin )]\$ '" >> /etc/kolla/admin-openrc.sh
 echo "<---"
 
 echo "---> Sharing example.test. zone with demo-project project"
