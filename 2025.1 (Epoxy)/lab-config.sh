@@ -31,9 +31,15 @@ echo "---> Creating m1.standard flavor"
 openstack flavor create --ram 1024 --disk 10 --vcpus 1 m1.standard
 echo "<---"
 
+echo "---> Creating 'images' subfolder"
+mkdir -p ~/images
+cd ~/images
+echo "<---"
+
 echo "---> Creating a public image public-cirros"
 wget https://download.cirros-cloud.net/0.6.3/cirros-0.6.3-x86_64-disk.img
 openstack image create --public --file cirros-0.6.3-x86_64-disk.img --disk-format qcow2 --container-format bare public-cirros
+cd ..
 echo "<---"
 
 echo "---> Creating project demo-project, user demo with role member in demo-project"
