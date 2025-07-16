@@ -30,7 +30,7 @@ fi
 
 # Get the Port ID for that instance - assuming the instance has only one port
 PORT_ID=$(openstack port list --server "$INSTANCE_ID" \
-  --device-owner compute:nova --format value -c ID)
+  --device-owner compute:nova --format value -c ID | head -1)
 
 # Ensure the port exists
 if [[ -z "$PORT_ID" ]]; then
