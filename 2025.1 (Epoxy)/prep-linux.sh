@@ -62,6 +62,8 @@ echo "<---"
 
 echo "---> Installing image building tools for OpenStack diskimage-builder"
 sudo apt install --no-install-recommends qemu-utils kpartx
+sudo systemctl disable --now libvirtd virtlogd virtlockd libvirtd.socket
+sudo apt purge -y libvirt-daemon-system libvirt-daemon libvirt-clients
 echo "<---"
 
 echo "---> Preparing second disk for Cinder LVM volume groups"
