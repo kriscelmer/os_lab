@@ -84,6 +84,11 @@ echo "---> Making sure DBUS library is installed"
 sudo apt install -y python3-dbus
 echo "<---"
 
+echo "---> Fetch remaining scripts from GitHub"
+curl -L https://github.com/kriscelmer/os_lab/archive/refs/heads/main.tar.gz | \
+  tar -xz --wildcards --strip-components=3 --no-anchored "os_lab-main/2025.1 (Epoxy)/scripts/*" -C .
+echo "<---"
+
 cat << EOF
 
 Ubuntu Linux is now configured and ready for Kolla Ansible OpenStack deployment.
