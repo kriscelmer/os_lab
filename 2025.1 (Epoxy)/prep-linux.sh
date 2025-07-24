@@ -60,12 +60,6 @@ sudo apt install -y bridge-utils cpu-checker libvirt-clients libvirt-daemon qemu
 sudo apt install -y python3-dev python3-venv git libffi-dev gcc libssl-dev libdbus-glib-1-dev vim nano net-tools htop dnsutils yq
 echo "<---"
 
-echo "---> Installing image building tools for OpenStack diskimage-builder"
-sudo apt install --no-install-recommends qemu-utils kpartx
-sudo systemctl disable --now libvirtd virtlogd virtlockd libvirtd.socket
-#sudo apt purge -y libvirt-daemon-system libvirt-daemon libvirt-clients
-echo "<---"
-
 echo "---> Preparing second disk for Cinder LVM volume groups"
 # Initialize the disk as a PV
 sudo pvcreate /dev/sdb
