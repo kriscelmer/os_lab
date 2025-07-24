@@ -98,7 +98,7 @@ openstack router add subnet demo-router demo-subnet
 echo "<---"
 
 echo "---> Creating private cirros image"
-openstack image create --file cirros-0.6.3-x86_64-disk.img --disk-format qcow2 --container-format bare demo-cirros
+openstack image create --file images/cirros-0.6.3-x86_64-disk.img --disk-format qcow2 --container-format bare demo-cirros
 echo "<---"
 
 echo "---> Creating security group allowing ingres of ICMP (ping) and SSH traffic"
