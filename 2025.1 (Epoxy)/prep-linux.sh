@@ -57,7 +57,7 @@ echo "<---"
 
 echo "---> Updating and installing basic packages"
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y bridge-utils cpu-checker libvirt-clients libvirt-daemon qemu-kvm parted
+sudo apt install -y bridge-utils cpu-checker libvirt-clients libvirt-daemon qemu-kvm virt-manager parted qemu-utils kpartx
 sudo apt install -y python3-dev python3-venv git libffi-dev gcc libssl-dev libdbus-glib-1-dev vim nano net-tools htop dnsutils yq
 echo "<---"
 

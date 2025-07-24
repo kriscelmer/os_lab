@@ -1,0 +1,6 @@
+# Install NGINX and supporting utilities.  The default Ubuntu repository includes NGINX; if you configure
+# the official nginx.org repository in the pre-install step, apt will install the latest stable version.
+nginx:
+  installtype: distro
+
+# You can uninstall packages by specifying `uninstall: true`.  Do not remove `cloud-init`

@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eux
+
+apt-get update
+
+# Optional: set package repos, etc. here
+
+# Upgrade distro
+DEBIAN_FRONTEND=noninteractive apt-get upgrade -y

@@ -13,6 +13,10 @@ echo "---> Activate openstack-venv to enable openstack CLI command"
 source ~/openstack-venv/bin/activate
 echo "<---"
 
+echo "---> Installing diskimage-builder"
+pip install diskimage-builder
+echo "<---"
+
 echo "---> Creating provider network"
 openstack network create --share --external --dns-domain example.test. --provider-network-type flat --provider-physical-network physnet1 provider-net
 VM_NAT_net_prefix=$(sudo ip -4 -o a show ens32 | awk '{print $4}' | cut -d '.' -f 1,2,3)
