@@ -9,7 +9,6 @@
 echo "---> Deploy OpenStack 2025.1 (Epoxy) All-in-One Lab using Kolla-Ansible in Docker containers"
 echo ""
 set -e
-set -x
 
 echo "---> Creating and activating virtual environment"
 cd ~
