@@ -69,7 +69,7 @@ read -rsp "Please enter OpenStack password for user '\$OS_USERNAME' (in project 
 echo
 export OS_PASSWORD=\$OS_PASSWORD_INPUT
 unset OS_PASSWORD_INPUT
-PS1='[\u@\h \W( demo )]\$ '
+PS1='[\u@\h \W( demo@demo-project )]\$ '
 EOF
 echo "<---"
 
@@ -103,6 +103,64 @@ openstack security group create --description 'Allows ssh and ping from any host
 openstack security group rule create --ethertype IPv4 --protocol icmp --remote-ip 0.0.0.0/0 ssh-icmp
 openstack security group rule create --ethertype IPv4 --protocol tcp --dst-port 22 --remote-ip 0.0.0.0/0 ssh-icmp
 echo "<---"
+
+echo "---> Creating a troubleshoting project and broken resources"
+source /etc/kolla/admin-openrc.sh
+openstack project create troubleshooting --description "Section 10 demo project"
+openstack role add --user demo --project troubleshooting member
+cat << EOF > ~/.demo-troubleshooting-openrc.sh
+echo "Enabling 'demo@troubleshooting' project credentials"
+# Clear any previous OS_* env vars
+for key in \$( set | awk '{FS="="}  /^OS_/ {print \$1}' ); do unset \$key ; done
+# Set OS_* env vars for user 'demo' in project 'troubleshooting'
+export OS_PROJECT_DOMAIN_NAME='Default'
+export OS_USER_DOMAIN_NAME='Default'
+export OS_PROJECT_NAME='troubleshooting'
+export OS_USERNAME='demo'
+export OS_AUTH_URL='http://10.0.0.11:5000'
+export OS_INTERFACE=public
+#export OS_ENDPOINT_TYPE='internalURL'
+export OS_IDENTITY_API_VERSION='3'
+export OS_REGION_NAME='RegionOne'
+export OS_AUTH_PLUGIN='password'
+# Read password from the terminal
+read -rsp "Please enter OpenStack password for user '\$OS_USERNAME' (in project '\$OS_PROJECT_NAME'): " OS_PASSWORD_INPUT
+echo
+export OS_PASSWORD=\$OS_PASSWORD_INPUT
+unset OS_PASSWORD_INPUT
+PS1='[\u@\h \W( demo@troubleshooting )]\$ '
+EOF
+source ~/.demo-troubleshooting-openrc.sh
+openstack network create sec10-net
+openstack subnet create sec10-subnet --network sec10-net --subnet-range 10.100.10.0/24 --no-dhcp --dns-nameserver 8.8.8.8 # no DHCP, use public DNS
+openstack router create sec10-router
+openstack router add subnet sec10-router sec10-subnet # NOTE: no external gateway
+openstack security group create sec10-ssh-icmp --description "Security group for Section 10 demo"
+openstack security group rule create --ethertype IPv4 --protocol icmp sec10-ssh-icmp
+openstack security group rule create --ethertype IPv4 --protocol tcp --dst-port 22 sec10-ssh-icmp
+openstack keypair create --private-key ~/sec10-key.pem sec10-key
+chmod 600 ~/sec10-key.pem
+openstack security group create sec10-icmp-only
+openstack security group rule create  --protocol icmp sec10-icmp-only
+openstack image create --file images/cirros-0.6.3-x86_64-disk.img --container-format bare --disk-format qcow2 --private --property hypervisor_type=hyperv sec10-cirros-hyperv
+openstack server create --flavor m1.tiny --image sec10-cirros-hyperv --key-name sec10-key --security-group sec10-ssh-icmp --network sec10-net sec10-hyperv-vm
+openstack server create --flavor m1.tiny --image public-cirros --security-group sec10-icmp-only --network provider-net sec10-no-key
+openstack volume create --size 1 sec10-vol
+VOL=$(openstack volume show -f value -c id sec10-vol)
+source /etc/kolla/admin-openrc.sh
+openstack volume set --state error $VOL
+cat << EOF > ~/utils/sec10-show-errors.sh
+#! /bin/bash
+# Quick health scan for current project
+echo "Project: \${OS_PROJECT_NAME:-UNKNOWN}"
+res=(server volume image network router port)
+for r in "\${res[@]}"; do
+  echo "Checking \$r resources for errors:"
+  openstack \$r list --long -c ID -c name -c status | awk -v rname=\$r 'NR>3 && \$0 !~ /(ACTIVE|UP|AVAILABLE|active)/ {print rname":",\$0}'
+done
+EOF
+chmod +x ~/utils/sec10-show-errors.sh
+echo "<---
 
 cat << EOF
 
