@@ -149,17 +149,6 @@ openstack volume create --size 1 sec10-vol
 VOL=$(openstack volume show -f value -c id sec10-vol)
 source /etc/kolla/admin-openrc.sh
 openstack volume set --state error $VOL
-cat << EOF > ~/utils/sec10-show-errors.sh
-#! /bin/bash
-# Quick health scan for current project
-echo "Project: \${OS_PROJECT_NAME:-UNKNOWN}"
-res=(server volume image network router port)
-for r in "\${res[@]}"; do
-  echo "Checking \$r resources for errors:"
-  openstack \$r list --long -c ID -c name -c status | awk -v rname=\$r 'NR>3 && \$0 !~ /(ACTIVE|UP|AVAILABLE|active)/ {print rname":",\$0}'
-done
-EOF
-chmod +x ~/utils/sec10-show-errors.sh
 echo "<---
 
 cat << EOF
