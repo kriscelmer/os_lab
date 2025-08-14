@@ -26,7 +26,7 @@ openstack security group create sec10-icmp-only
 openstack security group rule create  --protocol icmp sec10-icmp-only
 openstack image create --file images/cirros-0.6.3-x86_64-disk.img --container-format bare --disk-format qcow2 --private --property hypervisor_type=hyperv sec10-cirros-hyperv
 openstack server create --flavor m1.tiny --image sec10-cirros-hyperv --key-name sec10-key --security-group sec10-ssh-icmp --network sec10-net sec10-hyperv-vm
-openstack server create --flavor m1.tiny --image public-cirros --security-group sec10-icmp-only --network provider-net sec10-no-key
+openstack server create --flavor m1.tiny --image public-cirros --security-group sec10-icmp-only --network provider-net --password 'Changed!' sec10-no-key
 openstack volume create --size 1 sec10-vol
 VOL=$(openstack volume show -f value -c id sec10-vol)
 source /etc/kolla/admin-openrc.sh

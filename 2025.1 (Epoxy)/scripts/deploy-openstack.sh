@@ -120,7 +120,7 @@ kolla-ansible post-deploy -i all-in-one
 echo "<---"
 
 echo "---> Installing OpenStack CLI Client"
-pip install python-openstackclient python-designateclient
+pip install python-openstackclient python-designateclient python-heatclient
 echo "<---"
 
 echo "---> Sourcing admin's openrc credentials file"
