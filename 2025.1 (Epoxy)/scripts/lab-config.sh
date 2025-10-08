@@ -73,6 +73,24 @@ PS1='[\u@\h \W( demo@demo-project )]\$ '
 EOF
 echo "<---"
 
+echo "---> Creating example clouds.yaml file"
+cat << EOF > ~/.clouds.yaml
+clouds:
+  demo:
+    auth:
+      auth_url: http://10.0.0.11:5000
+      project_name: demo-project
+      username: demo
+      password: openstack
+  admin:
+    auth:
+      auth_url: http://10.0.0.11:5000
+      project_name: admin
+      username: admin
+      password: openstack
+EOF
+echo "<---"
+
 echo "---> Adding admin user name to shell prompt in admin-openrc.sh"
 echo "PS1='[\u@\h \W( admin )]\$ '" >> /etc/kolla/admin-openrc.sh
 echo "<---"
