@@ -74,7 +74,8 @@ EOF
 echo "<---"
 
 echo "---> Creating example clouds.yaml file"
-cat << EOF > ~/.clouds.yaml
+mkdir -p ~/.config/openstack
+cat << EOF > ~/.config/openstack/clouds.yaml
 clouds:
   demo:
     auth:
