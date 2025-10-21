@@ -2,13 +2,13 @@
 # Reset all OpenStack resources in the 'troubleshooting' project
 echo "---> Resetting all OpenStack resources in the 'troubleshooting' project"
 source ~/.demo-troubleshooting-openrc.sh
-if [ $1 != "--force" ]; then
+if [ "$1" != "--force" ]; then
   echo "Following resources will be deleted:"
   openstack project cleanup --dry-run --auth-project
   read -p "Press Enter to continue or Ctrl+C to cancel..."
 fi
 openstack project cleanup --auto-approve --auth-project
-if [ -f "~/sec10-key.pem"]; then
+if [ -f "~/sec10-key.pem" ]; then
   openstack keypair delete sec10-key
   rm -f ~/sec10-key.pem
 fi
