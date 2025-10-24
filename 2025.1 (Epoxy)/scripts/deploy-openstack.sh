@@ -54,10 +54,10 @@ cat << EOF | tee -a /etc/kolla/globals.yml
 # OpenStack Epoxy All-in-One Lab deployment configuration
 #
 # Configure Network Interfaces
-network_interface: "ens33"
-api_interface: "ens33"
-neutron_external_interface: "ens34"
-dns_interface: "ens33"
+network_interface: "ens34"
+api_interface: "ens34"
+neutron_external_interface: "ens35"
+dns_interface: "ens34"
 kolla_internal_vip_address: "10.0.0.11"
 kolla_external_vip_address: "10.0.0.11"
 
@@ -143,16 +143,16 @@ network:
   version: 2
   renderer: networkd
   ethernets:
-    ens32:
-      dhcp4: true
     ens33:
+      dhcp4: true
+    ens34:
       dhcp4: false
       addresses: [ 10.0.0.11/24 ]
       routes: []          # no default route via enp0s8
       nameservers:
         addresses: [ 10.0.0.11 ]
         search: [ example.test ]
-    ens34:
+    ens35:
       dhcp4: false        # no IP (Neutron will use this interface)
       optional: true
 EOF
