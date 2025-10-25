@@ -16,7 +16,7 @@ echo "<---"
 
 echo "---> Creating provider network"
 openstack network create --share --external --dns-domain example.test. --provider-network-type flat --provider-physical-network physnet1 provider-net
-VM_NAT_net_prefix=$(sudo ip -4 -o a show ens33 | awk '{print $4}' | cut -d '.' -f 1,2,3)
+VM_NAT_net_prefix=$(sudo ip -4 -o a show ens32 | awk '{print $4}' | cut -d '.' -f 1,2,3)
 openstack subnet create --network provider-net --allocation-pool start=$VM_NAT_net_prefix.100,end=$VM_NAT_net_prefix.127 --gateway $VM_NAT_net_prefix.2 --subnet-range $VM_NAT_net_prefix.0/24 provider-net-subnet
 echo "<---"
 

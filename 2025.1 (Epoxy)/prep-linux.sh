@@ -19,15 +19,15 @@ network:
   version: 2
   renderer: networkd
   ethernets:
-    ens33:
+    ens32:
       dhcp4: true
-    ens34:
+    ens33:
       dhcp4: false
       addresses: [ 10.0.0.11/24 ]
       routes: []          # no default route via enp0s8
       nameservers:
         addresses: [ 8.8.8.8, 8.8.4.4 ]   # use public DNS for general name resolution
-    ens35:
+    ens34:
       dhcp4: false        # no IP (Neutron will use this interface)
       optional: true
 EOF
